@@ -8,13 +8,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Reference Include="MySql.Data">
-        <HintPath>C:\Program Files (x86)\MySQL\Connector NET 8.0\Assemblies\net6.0\MySql.Data.dll</HintPath>
-      </Reference>
+      <PackageReference Include="Autofac" Version="6.4.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Autofac" Version="6.4.0" />
+      <ProjectReference Include="..\Contacts.Data\Contacts.Data.csproj" />
     </ItemGroup>
 
 </Project>

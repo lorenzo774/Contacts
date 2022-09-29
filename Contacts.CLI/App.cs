@@ -1,23 +1,18 @@
-﻿using Contacts.Data;
+﻿using Contacts.CLI.Systems;
 
 namespace Contacts.CLI;
 
 public class App : IApp
 {
-    private readonly IDataAccess _dataAccess;
-    
-    public App(IDataAccess dataAccess)
+    private readonly IMessage _message;
+
+    public App(IMessage message)
     {
-        _dataAccess = dataAccess;
+        _message = message;
     }
     
     public void Run()
     {
-        Console.WriteLine("Running ...");
-        var contacts = _dataAccess.LoadContacts();
-        foreach (var contact in contacts)
-        {
-            Console.WriteLine(contact);
-        }
+        _message.Help();
     }
 }

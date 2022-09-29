@@ -46,10 +46,42 @@ public class DataAccess : IDataAccess
             {
                 Birthdate = Convert.ToDateTime(sqlReader[1]),
                 FirstName = sqlReader[2].ToString(),
-                LastName = sqlReader[3].ToString()
+                LastName = sqlReader[3].ToString(),
+                Phone = sqlReader[4].ToString(),
+                Email = sqlReader[5].ToString()               
             });
         }
         sqlReader.Close();
         return contacts;
+    }
+
+    public void AddContact(Contact contact)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void RemoveContact(Contact contact)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void GetContactByFirstName(string firstName)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void GetContactByPhone(string phone)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void GetContactByLastName(string lastName)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void GetContactByEmail(string email)
+    {
+        throw new NotImplementedException();
     }
 }

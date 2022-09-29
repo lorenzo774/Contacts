@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contacts.CLI", "Contacts.CL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contacts.Library", "Contacts.Library\Contacts.Library.csproj", "{972F482F-9A6B-46B8-9721-CD77F21EEC8F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contacts.Data", "Contacts.Data\Contacts.Data.csproj", "{73B7C4F5-966F-4B70-AEC8-B5B10EF1A2A4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{972F482F-9A6B-46B8-9721-CD77F21EEC8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{972F482F-9A6B-46B8-9721-CD77F21EEC8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{972F482F-9A6B-46B8-9721-CD77F21EEC8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73B7C4F5-966F-4B70-AEC8-B5B10EF1A2A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73B7C4F5-966F-4B70-AEC8-B5B10EF1A2A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73B7C4F5-966F-4B70-AEC8-B5B10EF1A2A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73B7C4F5-966F-4B70-AEC8-B5B10EF1A2A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

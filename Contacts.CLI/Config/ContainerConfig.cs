@@ -1,7 +1,5 @@
-﻿using Autofac;
-using Contacts.CLI.Commands;
-using Contacts.CLI.Systems;
-using Contacts.Data;
+﻿using System.Reflection;
+using Autofac;
 
 namespace Contacts.CLI.Config;
 
@@ -9,13 +7,12 @@ public static class ContainerConfig
 {
     public static IContainer Configure()
     {
-        var container = new ContainerBuilder();
-        // Register dependencies
-        container.RegisterType<App>().As<IApp>();
-        container.RegisterType<DataAccess>().As<IDataAccess>();
-        container.RegisterType<Message>().As<IMessage>();
-        container.RegisterType<ContactsListCommand>().As<IContactsListCommand>();
-        
-        return container.Build();
+        var builder = new ContainerBuilder();
+        builder.RegisterType<App>().As<IApp>();
+        // Register all dependencies
+        builder.RegisterAssemblyTypes(
+                Assembly.GetExecutingAssembly())
+            .AsImplementedInterfaces();
+        return builder.Build();
     }
 }

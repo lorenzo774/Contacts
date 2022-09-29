@@ -6,7 +6,7 @@ namespace Contacts.CLI;
 
 public static class Program
 {
-    private static void Main(string[] args)
+    private static void Main(string[] _)
     {
         DataAccess.Configure();
         var container = ContainerConfig.Configure();

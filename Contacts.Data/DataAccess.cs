@@ -3,6 +3,9 @@ using MySql.Data.MySqlClient;
 
 namespace Contacts.Data;
 
+/// <summary>
+/// Data access layer
+/// </summary>
 public class DataAccess : IDataAccess
 {
     private static MySqlConnection? connection;

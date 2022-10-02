@@ -1,4 +1,5 @@
-﻿using Contacts.CLI.Config;
+﻿using System.Configuration;
+using Contacts.CLI.Config;
 using Contacts.Library;
 using MySql.Data.MySqlClient;
 
@@ -18,10 +19,10 @@ public class DataAccess : IDataAccess
     {
         var cnBuilder = new MySqlConnectionStringBuilder()
         {
-            Database = "Contacts",
-            Password = "bellissima_password",
-            Server = "localhost",
-            UserID = "root"
+            Database = ConfigurationManager.AppSettings["database"],
+            Password = ConfigurationManager.AppSettings["password"],
+            Server = ConfigurationManager.AppSettings["server"],
+            UserID = ConfigurationManager.AppSettings["user"]
         };
         connection = new MySqlConnection(cnBuilder.ConnectionString);
         try

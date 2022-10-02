@@ -27,7 +27,7 @@ public class Message : IMessage
         WriteMessage("\tSearch");
         Console.WriteLine("\tlist -> Get list of your contacts\n" +
                           "\tsort [field] -> Sort your list by a field\n" +
-                          "\tsearch [email] -> Search a contact by email\n");
+                          "\tget [email] -> Search a contact by email\n");
         WriteMessage("\tOther");
         Console.WriteLine("\thelp -> Get this message");
         WriteMessage("\n-------------------------------", ConsoleColor.Magenta);
@@ -35,7 +35,7 @@ public class Message : IMessage
 
     public void DisplayContacts(List<Contact> contacts)
     {
-        WriteMessage("\nContacts 👤 \n");
+        WriteMessage("\nContacts 👤👤👤 \n");
         foreach (var contact in contacts)
         {
             Console.WriteLine(contact);
@@ -44,6 +44,12 @@ public class Message : IMessage
         {
             Warning("No contacts");
         }
+    }
+
+    public void DisplayContact(Contact contact)
+    {
+        WriteMessage("\nContact 👤 \n");
+        Console.WriteLine(contact);
     }
 
     public void DisplayError(Exception exception)

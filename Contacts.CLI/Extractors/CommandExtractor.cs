@@ -14,7 +14,8 @@ public class CommandExtractor : ICommandExtractor
         IContactsListCommand contactsListCommand,
         IAddContactCommand addContactCommand,
         IUpdateContactCommand updateContactCommand,
-        IRemoveContactCommand removeContactCommand)
+        IRemoveContactCommand removeContactCommand,
+        IGetContactCommand getContactCommand)
     {
         _helpCommand = helpCommand;
         _nameCommands = new()
@@ -23,7 +24,8 @@ public class CommandExtractor : ICommandExtractor
             { "add", addContactCommand },            
             { "list", contactsListCommand },
             { "rm", removeContactCommand },
-            { "up", updateContactCommand }
+            { "up", updateContactCommand },
+            { "get", getContactCommand }
         };
     }
     

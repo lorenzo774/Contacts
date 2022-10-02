@@ -18,8 +18,8 @@ public class Message : IMessage
     {
         WriteMessage("\n------- Contacts v1.0.0 -------\n", ConsoleColor.Magenta);
         WriteMessage("\tAdd/Remove");
-        Console.WriteLine("\tadd [birthdate?] [first_name?] [last_name?] [phone?] [email] -> Add a new contact\n" +
-                          "\trm [email] -> Remove a contact by email address\n");
+        Console.WriteLine("\tadd [birthdate?] [first_name?] [last_name?] [phone?] [email?] -> Add a new contact\n" +
+                          "\trm [email | first_name | last_name | phone] -> Remove a contact by email address\n");
         WriteMessage("\tSearch");
         Console.WriteLine("\tlist -> Get list of your contacts\n" +
                           "\tsort [field] -> Sort your list by a field\n" +
@@ -31,9 +31,15 @@ public class Message : IMessage
 
     public void DisplayContacts(List<Contact> contacts)
     {
+        WriteMessage("\nContacts\n");
         foreach (var contact in contacts)
         {
             Console.WriteLine(contact);
         }
+    }
+
+    public void DisplayError(Exception exception)
+    {
+        WriteMessage($"\nError: {exception.Message}", ConsoleColor.Red);
     }
 }

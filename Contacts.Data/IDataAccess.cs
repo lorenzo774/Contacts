@@ -4,7 +4,7 @@ namespace Contacts.Data;
 
 public interface IDataAccess
 {
-    List<Contact> LoadContacts();
+    List<Contact> GetContacts();
     void AddContact(Contact contact);
     void RemoveContact(Contact contact);
     void GetContactByFirstName(string firstName);        

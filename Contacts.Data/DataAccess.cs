@@ -1,4 +1,5 @@
-﻿using Contacts.Library;
+﻿using Contacts.CLI.Config;
+using Contacts.Library;
 using MySql.Data.MySqlClient;
 
 namespace Contacts.Data;
@@ -33,12 +34,11 @@ public class DataAccess : IDataAccess
         }
     }
 
-    public List<Contact> LoadContacts()
+    public List<Contact> GetContacts()
     {
         if (connection == null)
-        {
             throw new Exception("Connection error");
-        }
+
         string sql = "SELECT * FROM contacts";
         var cmd = new MySqlCommand(sql, connection);
         var sqlReader = cmd.ExecuteReader();
@@ -60,7 +60,11 @@ public class DataAccess : IDataAccess
 
     public void AddContact(Contact contact)
     {
-        throw new NotImplementedException();
+        string sql = "INSERT INTO contacts (birthdate, first_name, last_name, phone, email)" +
+                     $"VALUES ('{contact.Birthdate.ToString(Settings.TimeFormat)}', '{contact.FirstName}', '{contact.LastName}', '{contact.Phone}', '{contact.Email}')";
+        var cmd = new MySqlCommand(sql, connection);
+        var sqlOperation = cmd.ExecuteScalar();
+        Console.WriteLine(sqlOperation);
     }
 
     public void RemoveContact(Contact contact)

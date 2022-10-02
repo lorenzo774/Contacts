@@ -8,11 +8,13 @@ namespace Contacts.CLI;
 /// </summary>
 public class App : IApp
 {
+    private readonly IMessage _message;
     private readonly IInputManager _inputManager;
     private readonly ICommandManager _commandManager;
 
-    public App(IInputManager inputManager, ICommandManager commandManager)
+    public App(IMessage message, IInputManager inputManager, ICommandManager commandManager)
     {
+        _message = message;
         _inputManager = inputManager;
         _commandManager = commandManager;
     }
@@ -30,7 +32,7 @@ public class App : IApp
         }
         catch (Exception e)
         {
-            Console.WriteLine($"Error: {e.Message}");
+            _message.DisplayError(e);
         }
     }
 }

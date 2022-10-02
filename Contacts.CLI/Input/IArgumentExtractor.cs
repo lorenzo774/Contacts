@@ -2,5 +2,5 @@
 
 public interface IArgumentExtractor
 {
-    
+    List<string> Extract();
 }

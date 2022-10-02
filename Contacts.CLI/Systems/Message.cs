@@ -13,13 +13,19 @@ public class Message : IMessage
         Console.WriteLine(message);
         Console.ResetColor();
     }
+
+    public void Warning(string message)
+    {
+        WriteMessage(message, ConsoleColor.Yellow);
+    }
     
     public void Help()
     {
         WriteMessage("\n------- Contacts v1.0.0 -------\n", ConsoleColor.Magenta);
-        WriteMessage("\tAdd/Remove");
-        Console.WriteLine("\tadd [birthdate?] [first_name?] [last_name?] [phone?] [email?] -> Add a new contact\n" +
-                          "\trm [email | first_name | last_name | phone] -> Remove a contact by email address\n");
+        WriteMessage("\tAdd/Remove/Update");
+        Console.WriteLine("\tadd [first_name?] [last_name?] [birthdate?] [phone?] [email?] -> Add a new contact\n" +
+                          "\trm [email | first_name | last_name | phone] -> Remove a contact by email address\n" +
+                          "\tup [email | first_name | last_name | phone] [field] [updated_field] -> Update a contact\n");
         WriteMessage("\tSearch");
         Console.WriteLine("\tlist -> Get list of your contacts\n" +
                           "\tsort [field] -> Sort your list by a field\n" +
@@ -35,6 +41,10 @@ public class Message : IMessage
         foreach (var contact in contacts)
         {
             Console.WriteLine(contact);
+        }    
+        if (contacts.Count == 0)
+        {
+            Warning("No contacts");
         }
     }
 

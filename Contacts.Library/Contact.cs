@@ -4,13 +4,13 @@ namespace Contacts.Library;
 
 public class Contact
 {
-    public DateTime Birthdate { get; init; }
-    public string? FirstName { get; init; } = "";
-    public string? LastName { get; init; } = "";
+    public DateTime Birthdate { get; set; }
+    public string? FirstName { get; set; } = "";
+    public string? LastName { get; set; } = "";
     [Phone]
-    public string? Phone { get; init; } = "";
+    public string? Phone { get; set; } = "";
     [EmailAddress]
-    public string? Email { get; init; } = "user@example.com";
+    public string? Email { get; set; } = "user@example.com";
     private string FullName => $"{FirstName} {LastName}";
 
     public override string ToString() => $"Birthdate: {Birthdate}\t" +

@@ -1,4 +1,5 @@
-﻿using Contacts.Data;
+﻿using Contacts.CLI.Input;
+using Contacts.Data;
 using Contacts.Library;
 
 namespace Contacts.CLI.Commands;
@@ -7,22 +8,18 @@ public interface IAddContactCommand : ICommand { }
 
 public class AddContactCommand : IAddContactCommand
 {
+    private readonly IContactExtractor _contactExtractor;
     private readonly IDataAccess _dataAccess;
 
-    public AddContactCommand(IDataAccess dataAccess)
+    public AddContactCommand(IContactExtractor contactExtractor, IDataAccess dataAccess)
     {
+        _contactExtractor = contactExtractor;
         _dataAccess = dataAccess;
     }
     
     public void Execute(List<string> args)
     {
-        _dataAccess.AddContact(new Contact()
-        {
-            Birthdate = Convert.ToDateTime(args[0]), 
-            FirstName = args[1],
-            LastName = args[2],
-            Phone = args[3],
-            Email = args[4]
-        });
+        var contact = _contactExtractor.Extract(args);
+        _dataAccess.AddContact(contact);
     }
 }

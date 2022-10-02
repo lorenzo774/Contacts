@@ -8,7 +8,10 @@ public static class Program
 {
     private static void Main(string[] _)
     {
+        // Config
         DataAccess.Configure();
+        ConsoleConfig.Configure();
+        
         var container = ContainerConfig.Configure();
         using (var scope = container.BeginLifetimeScope())
         {

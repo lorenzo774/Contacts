@@ -47,11 +47,11 @@ public class DataAccess : IDataAccess
         {
             contacts.Add(new Contact()
             {
-                Birthdate = Convert.ToDateTime(sqlReader[1]),
-                FirstName = sqlReader[2].ToString(),
-                LastName = sqlReader[3].ToString(),
-                Phone = sqlReader[4].ToString(),
-                Email = sqlReader[5].ToString()               
+                Email = sqlReader[0].ToString(),
+                FirstName = sqlReader[1].ToString(),
+                LastName = sqlReader[2].ToString(),
+                Birthdate = Convert.ToDateTime(sqlReader[3]),
+                Phone = sqlReader[4].ToString()             
             });
         }
         sqlReader.Close();
@@ -60,35 +60,82 @@ public class DataAccess : IDataAccess
 
     public void AddContact(Contact contact)
     {
-        string sql = "INSERT INTO contacts (birthdate, first_name, last_name, phone, email)" +
-                     $"VALUES ('{contact.Birthdate.ToString(Settings.TimeFormat)}', '{contact.FirstName}', '{contact.LastName}', '{contact.Phone}', '{contact.Email}')";
+        if (connection == null)
+            throw new Exception("Connection error");
+        
+        try
+        {
+            string sql = "INSERT INTO contacts (birthdate, first_name, last_name, phone, email)" +
+                         $"VALUES ('{contact.Birthdate.ToString(Settings.TimeFormat)}', '{contact.FirstName}', '{contact.LastName}', '{contact.Phone}', '{contact.Email}')";
+            var cmd = new MySqlCommand(sql, connection);
+            cmd.ExecuteScalar();
+        }
+        catch (MySqlException e)
+        {
+            if (Helper.IsDuplicateException(e))
+            {
+                throw new Exception($"Contact '{contact.Email}' already exist");
+            }
+        }
+    }
+
+    public void RemoveContact(string email)
+    {
+        string sql = $"DELETE FROM contacts WHERE email = '{email}'";
         var cmd = new MySqlCommand(sql, connection);
-        var sqlOperation = cmd.ExecuteScalar();
-        Console.WriteLine(sqlOperation);
+        int rowsAffected = cmd.ExecuteNonQuery();
+        if (rowsAffected == 0)
+        {
+            throw new Exception("Contact not found");
+        }
+    }
+    
+    public Contact? GetContactByEmail(string email)
+    {
+        if (connection == null)
+            throw new Exception("Connection error");
+
+        string sql = $"SELECT * FROM contacts WHERE email = '{email}'";
+        var cmd = new MySqlCommand(sql, connection);
+        var sqlReader = cmd.ExecuteReader();
+        Contact? contact = null;
+        while (sqlReader.Read())
+        {
+            contact = new Contact()
+            {
+                Email = sqlReader[0].ToString(),
+                FirstName = sqlReader[1].ToString(),
+                LastName = sqlReader[2].ToString(),
+                Birthdate = Convert.ToDateTime(sqlReader[3]),
+                Phone = sqlReader[4].ToString()
+            };
+        }
+        sqlReader.Close();
+        return contact;
     }
 
-    public void RemoveContact(Contact contact)
+    public void UpdateContact(string email, string field, string updatedField)
     {
-        throw new NotImplementedException();
-    }
+        if (connection == null)
+            throw new Exception("Connection error");
 
-    public void GetContactByFirstName(string firstName)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void GetContactByPhone(string phone)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void GetContactByLastName(string lastName)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void GetContactByEmail(string email)
-    {
-        throw new NotImplementedException();
+        string sql = $"UPDATE contacts SET {field} = '{updatedField}' WHERE email = '{email}'";
+        var cmd = new MySqlCommand(sql, connection);
+        try
+        {
+            if (cmd.ExecuteNonQuery() == 0)
+            {
+                throw new Exception("Contact not found");
+            }
+        }
+        catch (Exception e)
+        {
+            if (e is MySqlException)
+            {
+                throw new Exception($"{field} field doesn't exist");
+            }
+            throw;
+        }
+        
     }
 }

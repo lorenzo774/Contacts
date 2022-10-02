@@ -1,6 +1,4 @@
-﻿using Contacts.Library;
-
-namespace Contacts.CLI.Input;
+﻿namespace Contacts.CLI.Input;
 
 public interface IContactExtractor
 {

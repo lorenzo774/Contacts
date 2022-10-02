@@ -1,6 +1,5 @@
 ﻿using Contacts.CLI.Input;
 using Contacts.Data;
-using Contacts.Library;
 
 namespace Contacts.CLI.Commands;
 

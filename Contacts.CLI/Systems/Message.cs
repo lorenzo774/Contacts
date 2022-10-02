@@ -1,6 +1,4 @@
-﻿using Contacts.Library;
-
-namespace Contacts.CLI.Systems;
+﻿namespace Contacts.CLI.Systems;
 
 public class Message : IMessage
 {
@@ -23,13 +21,13 @@ public class Message : IMessage
     {
         WriteMessage("\n------- Contacts v1.0.0 -------\n", ConsoleColor.Magenta);
         WriteMessage("\tAdd/Remove/Update");
-        Console.WriteLine("\tadd [first_name?] [last_name?] [birthdate?] [phone?] [email?] -> Add a new contact\n" +
-                          "\trm [email | first_name | last_name | phone] -> Remove a contact by email address\n" +
-                          "\tup [email | first_name | last_name | phone] [field] [updated_field] -> Update a contact\n");
+        Console.WriteLine("\tadd [email] [first_name?] [last_name?] [birthdate?] [phone?] -> Add a new contact\n" +
+                          "\trm [email] -> Remove a contact by email address\n" +
+                          "\tup [email] [field] [updated_field] -> Update a contact\n");
         WriteMessage("\tSearch");
         Console.WriteLine("\tlist -> Get list of your contacts\n" +
                           "\tsort [field] -> Sort your list by a field\n" +
-                          "\tsearch [field? default=fullname] [value] -> Search a contact\n");
+                          "\tsearch [email] -> Search a contact by email\n");
         WriteMessage("\tOther");
         Console.WriteLine("\thelp -> Get this message");
         WriteMessage("\n-------------------------------", ConsoleColor.Magenta);
@@ -37,7 +35,7 @@ public class Message : IMessage
 
     public void DisplayContacts(List<Contact> contacts)
     {
-        WriteMessage("\nContacts\n");
+        WriteMessage("\nContacts 👤 \n");
         foreach (var contact in contacts)
         {
             Console.WriteLine(contact);

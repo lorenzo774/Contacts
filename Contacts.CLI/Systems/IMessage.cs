@@ -1,6 +1,4 @@
-﻿using Contacts.Library;
-
-namespace Contacts.CLI.Systems;
+﻿namespace Contacts.CLI.Systems;
 
 public interface IMessage
 {

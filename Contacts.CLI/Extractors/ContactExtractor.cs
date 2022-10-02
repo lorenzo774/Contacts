@@ -1,6 +1,4 @@
-﻿using Contacts.Library;
-
-namespace Contacts.CLI.Input;
+﻿namespace Contacts.CLI.Input;
 
 public class ContactExtractor : IContactExtractor
 {
@@ -17,7 +15,7 @@ public class ContactExtractor : IContactExtractor
 
         return birthDate;
     }
-
+    
     public Contact Extract(List<string> args)
     {
         if (args.Count == 0)
@@ -28,11 +26,11 @@ public class ContactExtractor : IContactExtractor
         var result = new Contact();
         try
         {
-            result.FirstName = args[0];
-            result.LastName = args[1];
-            result.Birthdate = GetBirthdate(args[2]);
-            result.Phone = args[3];
-            result.Email = args[4];
+            result.Email = args[0];
+            result.FirstName = args[1];
+            result.LastName = args[2];
+            result.Birthdate = GetBirthdate(args[3]);
+            result.Phone = args[4];
         }
         catch (Exception e)
         {

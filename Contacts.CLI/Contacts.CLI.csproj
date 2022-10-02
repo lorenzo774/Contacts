@@ -5,10 +5,8 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-      <UserSecretsId>448ba6bc-e13b-4818-b31e-8cd79b225a5e</UserSecretsId>
-      <AssemblyName>contacts</AssemblyName>
-  </PropertyGroup>
-
+        <AssemblyName>contacts</AssemblyName>
+    </PropertyGroup>
     <ItemGroup>
       <PackageReference Include="Autofac" Version="6.4.0" />
     </ItemGroup>

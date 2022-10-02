@@ -34,27 +34,38 @@ public class DataAccess : IDataAccess
         }
     }
 
-    public List<Contact> GetContacts()
+    public List<Contact> GetContacts(string orderBy = "")
     {
         if (connection == null)
             throw new Exception("Connection error");
 
-        string sql = "SELECT * FROM contacts";
+        string sql = $"SELECT * FROM contacts " +
+                     $"{(orderBy != "" ? "ORDER BY " + orderBy : "" )}";
         var cmd = new MySqlCommand(sql, connection);
-        var sqlReader = cmd.ExecuteReader();
         var contacts = new List<Contact>();
-        while (sqlReader.Read())
+        try
         {
-            contacts.Add(new Contact()
+            var sqlReader = cmd.ExecuteReader();
+            while (sqlReader.Read())
             {
-                Email = sqlReader[0].ToString(),
-                FirstName = sqlReader[1].ToString(),
-                LastName = sqlReader[2].ToString(),
-                Birthdate = Convert.ToDateTime(sqlReader[3]),
-                Phone = sqlReader[4].ToString()             
-            });
+                contacts.Add(new Contact()
+                {
+                    Email = sqlReader[0].ToString(),
+                    FirstName = sqlReader[1].ToString(),
+                    LastName = sqlReader[2].ToString(),
+                    Birthdate = Convert.ToDateTime(sqlReader[3]),
+                    Phone = sqlReader[4].ToString()             
+                });
+            }
+            sqlReader.Close();
         }
-        sqlReader.Close();
+        catch (Exception e)
+        {
+            if (e is MySqlException)
+            {
+                throw new Exception($"{orderBy} field doesn't exist");
+            }
+        }
         return contacts;
     }
 
